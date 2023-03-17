@@ -1,4 +1,5 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+$GLOBALS['APPLICATION']->RestartBuffer();
 IncludeTemplateLangFile(__FILE__);?>
 <?use Bitrix\Main\Page\Asset;?>
 <!DOCTYPE html>
@@ -68,49 +69,42 @@ IncludeTemplateLangFile(__FILE__);?>
                         "template1",
                         Array()
                     );?>
-                    <nav class="menu-block">
-                        <ul>
-                            <li class="att popup-wrap">
-                                <a id="hd_singin_but_open" href="" class="btn-toggle">Войти на сайт</a>
-                                <form action="/" class="frm-login popup-block">
-                                    <div class="frm-title">Войти на сайт</div>
-                                    <a href="" class="btn-close">Закрыть</a>
-                                    <div class="frm-row"><input type="text" placeholder="Логин"></div>
-                                    <div class="frm-row"><input type="password" placeholder="Пароль"></div>
-                                    <div class="frm-row"><a href="" class="btn-forgot">Забыли пароль</a></div>
-                                    <div class="frm-row">
-                                        <div class="frm-chk">
-                                            <input type="checkbox" id="login">
-                                            <label for="login">Запомнить меня</label>
-                                        </div>
-                                    </div>
-                                    <div class="frm-row"><input type="submit" value="Войти"></div>
-                                </form>
-                            </li>
-                            <li><a href="">Зарегистрироваться</a>
-                            </li>
-                        </ul>
-                    </nav>
+					<?$APPLICATION->IncludeComponent(
+	"bitrix:system.auth.form", 
+	"new", 
+	array(
+		"FORGOT_PASSWORD_URL" => "/user/",
+		"PROFILE_URL" => "/user/profile.php",
+		"REGISTER_URL" => "/user/register.php",
+		"SHOW_ERRORS" => "N",
+		"COMPONENT_TEMPLATE" => "new"
+	),
+	false
+);?>
                 </div>
             </div>
         </header>
         <!-- /header -->
         <!-- nav -->
-        <?$APPLICATION->IncludeComponent("bitrix:menu", "horizontal", Array(
-            "COMPONENT_TEMPLATE" => "horizontal_multilevel",
-            "ROOT_MENU_TYPE" => "top",	// Тип меню для первого уровня
-            "MENU_CACHE_TYPE" => "N",	// Тип кеширования
-            "MENU_CACHE_TIME" => "3600",	// Время кеширования (сек.)
-            "MENU_CACHE_USE_GROUPS" => "Y",	// Учитывать права доступа
-            "MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса
-            "MAX_LEVEL" => "3",	// Уровень вложенности меню
-            "CHILD_MENU_TYPE" => "left",	// Тип меню для остальных уровней
-            "USE_EXT" => "N",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
-            "DELAY" => "N",	// Откладывать выполнение шаблона меню
-            "ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
-        ),
-            false
-        );?>
+        <?$APPLICATION->IncludeComponent(
+	"bitrix:menu", 
+	"horizontal", 
+	array(
+		"COMPONENT_TEMPLATE" => "horizontal",
+		"ROOT_MENU_TYPE" => "top",
+		"MENU_CACHE_TYPE" => "N",
+		"MENU_CACHE_TIME" => "3600",
+		"MENU_CACHE_USE_GROUPS" => "Y",
+		"MENU_CACHE_GET_VARS" => array(
+		),
+		"MAX_LEVEL" => "3",
+		"CHILD_MENU_TYPE" => "left",
+		"USE_EXT" => "N",
+		"DELAY" => "N",
+		"ALLOW_MULTI_SELECT" => "N"
+	),
+	false
+);?>
         <!-- /nav -->
         <?if(!($isMainPage)):?>
         <!-- breadcrumbs -->

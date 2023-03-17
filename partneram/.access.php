@@ -1,3 +1,3 @@
 <?
-$PERM["raspisanie-meropriyatiy"]["*"]="D";
+$PERM["raspisanie-meropriyatiy"]["*"]="R";
 ?>
