@@ -32,7 +32,7 @@ $aMenuLinks = Array(
         "Партнерам",
         "/partneram/",
         Array(),
-        Array(),
+        Array("TXT"=>"Проверочный текст третий"),
         ""
     ),
 	Array(
